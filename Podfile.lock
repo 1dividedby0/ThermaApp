@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (4.8.0)
+  - AWSCore (2.7.3)
+  - AWSLambda (2.7.3):
+    - AWSCore (= 2.7.3)
+  - SwiftSoup (1.7.4)
+  - TouchDraw (2.1.2)
+
+DEPENDENCIES:
+  - Alamofire
+  - AWSLambda
+  - SwiftSoup
+  - TouchDraw
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AWSCore
+    - AWSLambda
+    - SwiftSoup
+    - TouchDraw
+
+SPEC CHECKSUMS:
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  AWSCore: 02d9ae2b6c2aaba6077fee2b09b0a62fb9b80282
+  AWSLambda: 5bbc3175e025c7ea1fb29f227710ae36e3cf8697
+  SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
+  TouchDraw: 80b52af0e29354473205ffb478c881683d770475
+
+PODFILE CHECKSUM: 61633c8111795a3d8543cf88e42d5374b20f29d8
+
+COCOAPODS: 1.5.3
