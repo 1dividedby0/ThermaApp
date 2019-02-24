@@ -164,12 +164,43 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
             let downloadLink = getDownloadLink(fromLinkElement: linksElements.get(i))
             print(downloadLink)
             downloadFromLink(downloadLink, withDestinationName: "\(i).pdf", completion: { (agenda) in
-                self.pastAgendas.append(agenda)
+                
+                // we want to make sure no future agendas or the current agenda is in pastAgendas
+                let calendar = Calendar.current
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy/MM/dd HH:mm"
+                
+                let components = agenda.date.replacingOccurrences(of: "Week of ", with: "").split(separator: "-")
+                let date1 = formatter.date(from: "20\(components[2])/\(components[0])/\(components[1]) 00:00")
+                
+                let currentDate = Date()
+                let date2 = calendar.startOfDay(for: currentDate)
+                
+                let difference = calendar.dateComponents([Calendar.Component.day], from: date1!, to: date2).day!
+                
+                if difference > 7 {
+                    self.pastAgendas.append(agenda)
+                }
+                
+                // sort pastAgendas if we are finished loading everything
+                if i == linksElements.size() - 1 {
+                    self.pastAgendas.sort { (agenda1, agenda2) -> Bool in
+                        let components1 = agenda1.date.replacingOccurrences(of: "Week of ", with: "").split(separator: "-")
+                        let date1 = formatter.date(from: "20\(components1[2])/\(components1[0])/\(components1[1]) 00:00")
+                        
+                        let components2 = agenda2.date.replacingOccurrences(of: "Week of ", with: "").split(separator: "-")
+                        let date2 = formatter.date(from: "20\(components2[2])/\(components2[0])/\(components2[1]) 00:00")
+                        
+                        let difference = calendar.dateComponents([Calendar.Component.day], from: date2!, to: date1!).day!
+                        return difference > 0
+                    }
+                }
                 self.tableView.reloadData()
             }) { (error) in
                 print(error)
             }
         }
+        
     }
     
     func getDownloadLink(fromLinkElement element: Element) -> String{

@@ -81,7 +81,7 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
         mailView.mailComposeDelegate = self
         
         mailView.setToRecipients(["dhruv.mangtani@gmail.com"])
-        mailView.setSubject("Nigga Toilet")
+        mailView.setSubject("Therma Safety Meeting")
         mailView.setMessageBody("Warning: signatures will not show if viewed on the Gmail iOS app.", isHTML: true)
         
         mailView.addAttachmentData(data, mimeType: "application/pdf", fileName: "\(agenda.name!).pdf")

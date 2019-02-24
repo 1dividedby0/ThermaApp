@@ -31,6 +31,7 @@ class AgendaViewController: UIViewController {
         titleLabel.text = agenda.name
         
         textView.text = agenda.text
+        textView.contentInset = UIEdgeInsets(top: -7, left: 0, bottom: 0, right: 0)
     }
    
     @IBAction func `continue`(_ sender: Any) {
