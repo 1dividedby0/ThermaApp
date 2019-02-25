@@ -11,6 +11,7 @@ import WebKit
 
 class WebViewController: UIViewController {
 
+    @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var webView: WKWebView!
     
     var agenda: Agenda!
@@ -18,7 +19,7 @@ class WebViewController: UIViewController {
     var isCurrentAgenda: Bool!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()  
         navigationItem.title = agenda.date
         webView.load(URLRequest(url: URL(string: onlineURL)!))
     }
@@ -31,8 +32,11 @@ class WebViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-//        destination.webURL = onlineURL
+        if segue.identifier == "toSubmit" {
+            let destination = segue.destination as! SubmitAgendaTableViewController
+            destination.agenda = agenda
+            destination.webURL = onlineURL
+            destination.isCurrentAgenda = isCurrentAgenda
+        }
     }
-    
-
 }

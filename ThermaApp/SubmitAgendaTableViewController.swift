@@ -120,10 +120,8 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
                     print("Error")
                 }
                 
-                if self.isCurrentAgenda {
-                    let encoded = NSKeyedArchiver.archivedData(withRootObject: self.agenda)
-                    UserDefaults.standard.set(encoded, forKey: "CurrentAgenda")
-                }
+                let encoded = NSKeyedArchiver.archivedData(withRootObject: self.agenda)
+                UserDefaults.standard.set(encoded, forKey: self.agenda.name)
             }
         } else if segue.identifier == "toSignatureList" {
             let destination = segue.destination as! SignatureListViewController

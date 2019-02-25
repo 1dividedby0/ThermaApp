@@ -94,10 +94,8 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
             agenda.signatures.remove(at: index)
             agenda.attendees.remove(at: index)
             
-            if isCurrentAgenda {
-                let encoded = NSKeyedArchiver.archivedData(withRootObject: agenda)
-                UserDefaults.standard.set(encoded, forKey: "CurrentAgenda")
-            }
+            let encoded = NSKeyedArchiver.archivedData(withRootObject: agenda)
+            UserDefaults.standard.set(encoded, forKey: agenda.name)
             
             completion(agenda.attendees.count)
             tableView.reloadData()

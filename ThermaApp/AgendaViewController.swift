@@ -33,10 +33,6 @@ class AgendaViewController: UIViewController {
         textView.text = agenda.text
         textView.contentInset = UIEdgeInsets(top: -7, left: 0, bottom: 0, right: 0)
     }
-   
-    @IBAction func `continue`(_ sender: Any) {
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSubmit" {

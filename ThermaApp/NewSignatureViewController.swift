@@ -91,10 +91,9 @@ class NewSignatureViewController: UITableViewController, UITextFieldDelegate {
                 self.agenda.attendees[self.index!] = self.nameTextField.text!
                 self.agenda.signatures[self.index!] = self.signature
             }
-            if self.isCurrentAgenda {
-                let encoded = NSKeyedArchiver.archivedData(withRootObject: self.agenda)
-                UserDefaults.standard.set(encoded, forKey: "CurrentAgenda")
-            }
+            
+            let encoded = NSKeyedArchiver.archivedData(withRootObject: self.agenda)
+            UserDefaults.standard.set(encoded, forKey: self.agenda.name)
             
             self.completion()
         }

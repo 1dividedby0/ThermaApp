@@ -12,6 +12,7 @@ import TouchDraw
 class SignatureCreatorViewController: UIViewController, TouchDrawViewDelegate {
 
     @IBOutlet weak var drawView: TouchDrawView!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var completion: ((UIImage) -> Void)!
     var signature: UIImage?
@@ -19,8 +20,8 @@ class SignatureCreatorViewController: UIViewController, TouchDrawViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         drawView.delegate = self
+        drawView.setWidth(5)
         
-        // Do any additional setup after loading the view.
         let orientation = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(orientation, forKey: "orientation")
     }

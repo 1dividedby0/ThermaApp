@@ -122,7 +122,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="continue:" destination="UJK-2y-eVF" eventType="touchUpInside" id="tCw-e7-zeI"/>
                                     <segue destination="7Tc-Lz-IPz" kind="show" identifier="toSubmit" id="wYv-ws-7U5"/>
                                 </connections>
                             </button>
@@ -344,7 +343,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yp0-Bp-uP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2416.8000000000002" y="-572.56371814092961"/>
+            <point key="canvasLocation" x="2417" y="-572"/>
         </scene>
         <!--SIGNATURES-->
         <scene sceneID="vX1-Kg-n44">
@@ -470,7 +469,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evp-oU-SBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3229.5999999999999" y="147.97601199400302"/>
+            <point key="canvasLocation" x="3206" y="142"/>
         </scene>
         <!--Signature Creator View Controller-->
         <scene sceneID="WQk-9S-Zws">
@@ -516,12 +515,13 @@
                     </view>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="doneButton" destination="EnW-iX-scn" id="rQD-fD-emB"/>
                         <outlet property="drawView" destination="yDj-GJ-aae" id="DfD-Me-8ZH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25m-YX-leG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4276" y="141.67916041979012"/>
+            <point key="canvasLocation" x="3206" y="892"/>
         </scene>
         <!--Edit Agenda View Controller-->
         <scene sceneID="EkO-dC-rHt">
@@ -595,7 +595,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Y8-GK-o46">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="534"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -603,17 +603,29 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pm1-ny-ddH">
+                                <rect key="frame" x="16" y="606" width="343" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <segue destination="7Tc-Lz-IPz" kind="show" identifier="toSubmit" id="IUd-Yb-b7o"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="eCj-pt-2sa"/>
                     </view>
                     <connections>
+                        <outlet property="continueButton" destination="pm1-ny-ddH" id="17K-zr-fue"/>
                         <outlet property="webView" destination="4Y8-GK-o46" id="Tbo-cT-8j1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihm-Nk-reH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1473" y="142"/>
+            <point key="canvasLocation" x="1572" y="142"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wYv-ws-7U5"/>
+    </inferredMetricsTieBreakers>
 </document>

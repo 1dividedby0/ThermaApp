@@ -15,7 +15,6 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var currentAgendaButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    var pendingAgendas: [Agenda] = []
     var pastAgendas: [Agenda] = []
     var currentAgenda: Agenda!
     var fileLocalURLs: [String:URL] = [:]
@@ -30,7 +29,7 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -45,9 +44,6 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return pendingAgendas.count
-        }
-        if section == 1 {
             return pastAgendas.count
         }
         return 0
@@ -59,9 +55,6 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
         let dateLabel = cell!.viewWithTag(2) as! UILabel
         
         if indexPath.section == 0 {
-            nameLabel.text = pendingAgendas[indexPath.row].name
-            dateLabel.text = pendingAgendas[indexPath.row].date
-        } else if indexPath.section == 1 {
             nameLabel.text = pastAgendas[indexPath.row].name
             dateLabel.text = pastAgendas[indexPath.row].date
         }
@@ -74,11 +67,6 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
         var agenda: Agenda?
         
         if indexPath.section == 0 {
-            agenda = pendingAgendas[indexPath.row]
-            if pendingAgendas[indexPath.row].text.contains("•\n") {
-                shouldDoWebView = true
-            }
-        } else if indexPath.section == 1 {
             agenda = pastAgendas[indexPath.row]
             if pastAgendas[indexPath.row].text.contains("•\n") {
                 shouldDoWebView = true
@@ -110,34 +98,7 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
             let datesElements = try document.select("h2.entry-title")
             let linksElements = try document.select("p.download-link")
             
-            if let decoded = UserDefaults.standard.object(forKey: "CurrentAgenda") as? Data{
-                print(decoded)
-//                let unarc = try NSKeyedUnarchiver(forReadingFrom: decoded)
-//                unarc.setClass(Agenda.self, forClassName: "Agenda")
-//                let decodedAgenda = unarc.decodeObject(forKey: "CurrentAgenda") as! Agenda
-                
-                let decodedAgenda = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! Agenda
-                
-                
-                let calendar = Calendar.current
-                let currentDate = Date()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                let date1 = calendar.startOfDay(for: currentDate)
-                
-                let components = decodedAgenda.date.replacingOccurrences(of: "Week of ", with: "").split(separator: "-")
-                let date2 = formatter.date(from: "20\(components[2])/\(components[0])/\(components[1]) 00:00")
-                
-                let dateDifference = calendar.dateComponents([Calendar.Component.day], from: date2!, to: date1).day!
-                
-                if dateDifference > 7 {
-                    downloadCurrentAgenda(withDatesArray: datesElements, withLinksArray: linksElements)
-                } else {
-                    currentAgenda = decodedAgenda
-                }
-            } else {
-                downloadCurrentAgenda(withDatesArray: datesElements, withLinksArray: linksElements)
-            }
+            downloadCurrentAgenda(withDatesArray: datesElements, withLinksArray: linksElements)
             
             downloadPastAgendas(withDatesArray: datesElements, withLinksArray: linksElements)
         } catch {}
@@ -149,11 +110,18 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
         let downloadLink = getDownloadLink(fromLinkElement: linksElements.get(closestIndex))
         print(downloadLink)
         downloadFromLink(downloadLink, withDestinationName: "CurrentAgenda.pdf", completion: { (agenda) in
-            self.currentAgenda = agenda
+            let decoded = UserDefaults.standard.object(forKey: agenda.name)
             do {
-                let encoded = try NSKeyedArchiver.archivedData(withRootObject: agenda, requiringSecureCoding: false)
-                UserDefaults.standard.set(encoded, forKey: "CurrentAgenda")
+                if decoded == nil{
+                    self.currentAgenda = agenda
+                    let encoded = try NSKeyedArchiver.archivedData(withRootObject: agenda, requiringSecureCoding: false)
+                    UserDefaults.standard.set(encoded, forKey: agenda.name)
+                } else {
+                    let decodedAgenda = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! Agenda
+                    self.currentAgenda = decodedAgenda
+                }
             } catch {}
+            
         }) { (error) in
             print(error)
         }
@@ -164,7 +132,6 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
             let downloadLink = getDownloadLink(fromLinkElement: linksElements.get(i))
             print(downloadLink)
             downloadFromLink(downloadLink, withDestinationName: "\(i).pdf", completion: { (agenda) in
-                
                 // we want to make sure no future agendas or the current agenda is in pastAgendas
                 let calendar = Calendar.current
                 let formatter = DateFormatter()
@@ -179,7 +146,17 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
                 let difference = calendar.dateComponents([Calendar.Component.day], from: date1!, to: date2).day!
                 
                 if difference > 7 {
-                    self.pastAgendas.append(agenda)
+                    let decoded = UserDefaults.standard.object(forKey: agenda.name)
+                    do {
+                        if decoded == nil{
+                            self.pastAgendas.append(agenda)
+                            let encoded = try NSKeyedArchiver.archivedData(withRootObject: agenda, requiringSecureCoding: false)
+                            UserDefaults.standard.set(encoded, forKey: agenda.name)
+                        } else {
+                            let decodedAgenda = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! Agenda
+                            self.pastAgendas.append(decodedAgenda)
+                        }
+                    } catch {}
                 }
                 
                 // sort pastAgendas if we are finished loading everything
