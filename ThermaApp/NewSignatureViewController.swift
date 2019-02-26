@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TouchDraw
 
 class NewSignatureViewController: UITableViewController, UITextFieldDelegate {
 
@@ -14,11 +15,11 @@ class NewSignatureViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var signature: UIImage!
+    var strokes: [Stroke]!
     var name: String?
     var index: Int?
     
     var agenda: Agenda!
-    var isCurrentAgenda: Bool!
     var completion: (() -> Void)!
     
     override func viewDidLoad() {
@@ -112,8 +113,20 @@ class NewSignatureViewController: UITableViewController, UITextFieldDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "toSignatureCreator" {
             let destination = segue.destination as! SignatureCreatorViewController
-            destination.completion = { image in
+            if index != nil {
+                destination.strokes = agenda.signaturesStrokes[index!]
+            }
+            destination.completion = { image, strokes in
                 self.signature = image
+                self.strokes = strokes
+                if self.index != nil{
+                    self.agenda.signaturesStrokes[self.index!] = strokes
+                } else {
+                    if self.agenda.signaturesStrokes == nil {
+                        self.agenda.signaturesStrokes = []
+                    }
+                    self.agenda.signaturesStrokes.append(strokes)
+                }
             }
         }
     }

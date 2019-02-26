@@ -19,7 +19,6 @@ class AgendaViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     
     var agenda: Agenda!
-    var isCurrentAgenda: Bool!
     var webURL: String!
     
     override func viewDidLoad() {
@@ -39,7 +38,6 @@ class AgendaViewController: UIViewController {
             let destination = segue.destination as! SubmitAgendaTableViewController
             destination.agenda = agenda
             destination.webURL = webURL
-            destination.isCurrentAgenda = isCurrentAgenda
         }
     }
 }

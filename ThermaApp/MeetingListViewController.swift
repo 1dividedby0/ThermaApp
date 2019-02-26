@@ -74,18 +74,18 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if shouldDoWebView {
-            performSegue(withIdentifier: "toWebview", sender: (agenda, false))
+            performSegue(withIdentifier: "toWebview", sender: agenda)
         } else {
-            performSegue(withIdentifier: "toAgenda", sender: (agenda, false))
+            performSegue(withIdentifier: "toAgenda", sender: agenda)
         }
         
     }
     
     @IBAction func currentAgenda(_ sender: Any) {
         if currentAgenda.text.contains("•\n") {
-            performSegue(withIdentifier: "toWebview", sender: (currentAgenda, true))
+            performSegue(withIdentifier: "toWebview", sender: currentAgenda)
         } else {
-            performSegue(withIdentifier: "toAgenda", sender: (currentAgenda, true))
+            performSegue(withIdentifier: "toAgenda", sender: currentAgenda)
         }
     }
     
@@ -327,22 +327,12 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAgenda"{
             let destination = segue.destination as! AgendaViewController
-            
-            let senderTuple = sender as! (Agenda, Bool)
-            destination.agenda = senderTuple.0
+            destination.agenda = sender as! Agenda
             destination.webURL = downloadURLs[destination.agenda.name]
-            
-            // current agenda
-            destination.isCurrentAgenda = senderTuple.1
-            
         } else if segue.identifier == "toWebview" {
             let destination = segue.destination as! WebViewController
             
-            let senderTuple = sender as! (Agenda, Bool)
-            
-            destination.agenda = senderTuple.0
-            destination.isCurrentAgenda = senderTuple.1
-            
+            destination.agenda = sender as! Agenda
             destination.onlineURL = downloadURLs[destination.agenda.name]
         }
     }

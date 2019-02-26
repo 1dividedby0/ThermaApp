@@ -21,7 +21,6 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
     @IBOutlet weak var submitButton: UIButton!
     
     var agenda: Agenda!
-    var isCurrentAgenda: Bool!
     var webURL: String!
     
     override func viewDidLoad() {
@@ -126,7 +125,6 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
         } else if segue.identifier == "toSignatureList" {
             let destination = segue.destination as! SignatureListViewController
             destination.agenda = agenda
-            destination.isCurrentAgenda = isCurrentAgenda
             destination.completion = { numSignatures in
                 self.signaturesLabel.text = "\(numSignatures)"
             }

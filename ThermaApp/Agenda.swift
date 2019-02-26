@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import TouchDraw
 
 class Agenda: NSObject, NSCoding {
     
@@ -16,6 +17,7 @@ class Agenda: NSObject, NSCoding {
     var text: String!
     var attendees: [String]!
     var signatures: [UIImage]!
+    var signaturesStrokes: [[Stroke]]!
     
     var supervisor: String!
     var site: String!
@@ -27,6 +29,7 @@ class Agenda: NSObject, NSCoding {
         self.text = text
         self.attendees = [String]()
         self.signatures = [UIImage]()
+        self.signaturesStrokes = [[Stroke]]()
         self.supervisor = ""
         self.site = ""
         self.instructor = ""
@@ -38,6 +41,7 @@ class Agenda: NSObject, NSCoding {
         aCoder.encode(text, forKey: "text")
         aCoder.encode(attendees, forKey: "attendees")
         aCoder.encode(signatures, forKey: "signatures")
+        aCoder.encode(signaturesStrokes, forKey: "signaturesStrokes")
         
         aCoder.encode(supervisor, forKey: "supervisor")
         aCoder.encode(site, forKey: "site")
@@ -50,6 +54,7 @@ class Agenda: NSObject, NSCoding {
         text = aDecoder.decodeObject(forKey: "text") as? String
         attendees = aDecoder.decodeObject(forKey: "attendees") as? [String]
         signatures = aDecoder.decodeObject(forKey: "signatures") as? [UIImage]
+        signaturesStrokes = aDecoder.decodeObject(forKey: "signaturesStrokes") as? [[Stroke]]
         
         supervisor = aDecoder.decodeObject(forKey: "supervisor") as? String
         site = aDecoder.decodeObject(forKey: "site") as? String

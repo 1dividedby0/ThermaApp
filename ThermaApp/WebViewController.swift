@@ -16,7 +16,6 @@ class WebViewController: UIViewController {
     
     var agenda: Agenda!
     var onlineURL: String!
-    var isCurrentAgenda: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()  
@@ -36,7 +35,6 @@ class WebViewController: UIViewController {
             let destination = segue.destination as! SubmitAgendaTableViewController
             destination.agenda = agenda
             destination.webURL = onlineURL
-            destination.isCurrentAgenda = isCurrentAgenda
         }
     }
 }

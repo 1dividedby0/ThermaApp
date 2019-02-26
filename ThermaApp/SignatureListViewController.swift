@@ -16,7 +16,6 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
     let searchController = UISearchController(searchResultsController: nil)
     
     var agenda: Agenda!
-    var isCurrentAgenda: Bool!
     var completion: ((Int) -> Void)!
     
     var displayedAttendees: [String]!
@@ -92,6 +91,7 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
                 index = agenda.attendees.firstIndex(of: displayedAttendees[indexPath.row])!
             }
             agenda.signatures.remove(at: index)
+            agenda.signaturesStrokes.remove(at: index)
             agenda.attendees.remove(at: index)
             
             let encoded = NSKeyedArchiver.archivedData(withRootObject: agenda)
@@ -109,7 +109,6 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
         if segue.identifier == "toNewSignature" {
             let destination = segue.destination as! NewSignatureViewController
             destination.agenda = agenda
-            destination.isCurrentAgenda = isCurrentAgenda
             
             if let row = sender as? Int {
                 var attendee = agenda.attendees[row]

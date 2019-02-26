@@ -14,13 +14,18 @@ class SignatureCreatorViewController: UIViewController, TouchDrawViewDelegate {
     @IBOutlet weak var drawView: TouchDrawView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var completion: ((UIImage) -> Void)!
+    var completion: ((UIImage, [Stroke]) -> Void)!
     var signature: UIImage?
+    var strokes: [Stroke]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         drawView.delegate = self
         drawView.setWidth(5)
+        
+        if let loadedStrokes = strokes {
+            drawView.importStack(loadedStrokes)
+        }
         
         let orientation = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(orientation, forKey: "orientation")
@@ -31,7 +36,8 @@ class SignatureCreatorViewController: UIViewController, TouchDrawViewDelegate {
         UIDevice.current.setValue(orientation, forKey: "orientation")
         dismiss(animated: true) {
             let image = self.drawView.exportDrawing()
-            self.completion(image)
+            let strokes = self.drawView.exportStack()
+            self.completion(image, strokes)
         }
     }
     
@@ -48,15 +54,4 @@ class SignatureCreatorViewController: UIViewController, TouchDrawViewDelegate {
     override var shouldAutorotate: Bool {
         return true
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
