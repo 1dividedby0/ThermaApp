@@ -12,12 +12,13 @@ import MessageUI
 
 class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var supervisorLabel: UILabel!
     @IBOutlet weak var signaturesLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var siteLabel: UILabel!
     @IBOutlet weak var topicLabel: UILabel!
     @IBOutlet weak var instructorLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     
     var agenda: Agenda!
@@ -30,6 +31,20 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
         siteLabel.text = agenda.site
         topicLabel.text = agenda.name
         instructorLabel.text = agenda.instructor
+        dateLabel.text = agenda.date
+        var dateComponents = DateComponents()
+        let agendaDateComps = agenda.date.components(separatedBy: "-")
+        dateComponents.year = Int("20\(agendaDateComps[2])")
+        dateComponents.month = Int(agendaDateComps[0])
+        dateComponents.day = Int(agendaDateComps[1])
+        datePicker.date = Calendar.current.date(from: dateComponents)!
+    }
+    
+    @IBAction func didChangeValue(_ sender: Any) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yy"
+        agenda.date = dateFormatter.string(from: datePicker.date)
         dateLabel.text = agenda.date
     }
     
@@ -54,8 +69,6 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
                 performSegue(withIdentifier: "editAttribute", sender: ("Topic", topicLabel))
             } else if indexPath.row == 2 {
                 performSegue(withIdentifier: "editAttribute", sender: ("Instructor", instructorLabel))
-            } else if indexPath.row == 3 {
-                performSegue(withIdentifier: "editAttribute", sender: ("Date", dateLabel))
             }
         }
     }
@@ -113,8 +126,6 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
                     self.agenda.name = text
                 case "Instructor":
                     self.agenda.instructor = text
-                case "Date":
-                    self.agenda.date = text
                 default:
                     print("Error")
                 }

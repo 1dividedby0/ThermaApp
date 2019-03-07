@@ -163,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3tO-q6-tSb" userLabel="SUBMIT">
-                            <rect key="frame" x="0.0" y="380" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="488" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="SUBMIT"/>
                             <connections>
@@ -297,11 +297,11 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="54" id="DoE-CA-jDY">
-                                        <rect key="frame" x="0.0" y="326" width="375" height="54"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="162" id="DoE-CA-jDY">
+                                        <rect key="frame" x="0.0" y="326" width="375" height="162"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DoE-CA-jDY" id="aiC-qL-Xbe">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="161.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4y-i1-O77">
@@ -311,8 +311,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzc-2H-Bez">
-                                                    <rect key="frame" x="234" y="16" width="102" height="21"/>
+                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="SqU-Oi-5Jz">
+                                                    <rect key="frame" x="59" y="37" width="250" height="114"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="573074318.67520201">
+                                                        <!--2019-02-28 19:18:38 +0000-->
+                                                    </date>
+                                                    <connections>
+                                                        <action selector="didChangeValue:" destination="7Tc-Lz-IPz" eventType="valueChanged" id="bdE-59-42b"/>
+                                                    </connections>
+                                                </datePicker>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iz-5G-upq">
+                                                    <rect key="frame" x="231" y="16" width="102" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -330,7 +340,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="dateLabel" destination="Uzc-2H-Bez" id="B4S-03-swd"/>
+                        <outlet property="dateLabel" destination="6iz-5G-upq" id="Ttd-5a-uc8"/>
+                        <outlet property="datePicker" destination="SqU-Oi-5Jz" id="zjY-0u-cvD"/>
                         <outlet property="instructorLabel" destination="Z6l-Yd-8dq" id="y8L-cI-fxe"/>
                         <outlet property="signaturesLabel" destination="JM4-dF-F1u" id="Tc0-rr-WP8"/>
                         <outlet property="siteLabel" destination="WAz-tA-rDJ" id="cz1-lW-7uN"/>
@@ -343,7 +354,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yp0-Bp-uP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2417" y="-572"/>
+            <point key="canvasLocation" x="2416.8000000000002" y="-572.56371814092961"/>
         </scene>
         <!--SIGNATURES-->
         <scene sceneID="vX1-Kg-n44">
