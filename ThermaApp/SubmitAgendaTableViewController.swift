@@ -23,6 +23,7 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
     
     var agenda: Agenda!
     var webURL: String!
+    var dateExpanded: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,20 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
         tableView.tableFooterView = submitButton
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 && indexPath.section == 1{
+            let cell = tableView.viewWithTag(100) as! UITableViewCell
+            if !dateExpanded{
+                dateExpanded = true
+                return 144
+            }
+            dateExpanded = false
+            return 54
+        }
+        // whatever the normal height is
+        return 54
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
@@ -69,6 +84,9 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
                 performSegue(withIdentifier: "editAttribute", sender: ("Topic", topicLabel))
             } else if indexPath.row == 2 {
                 performSegue(withIdentifier: "editAttribute", sender: ("Instructor", instructorLabel))
+            } else if indexPath.row == 3 {
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             }
         }
     }

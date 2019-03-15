@@ -16,6 +16,8 @@
 		E484D9EE221FE5A800C9CCAD /* SignatureListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E484D9ED221FE5A800C9CCAD /* SignatureListViewController.swift */; };
 		E484D9F2221FED4400C9CCAD /* NewSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E484D9F1221FED4400C9CCAD /* NewSignatureViewController.swift */; };
 		E484D9F4221FF1D200C9CCAD /* SignatureCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E484D9F3221FF1D200C9CCAD /* SignatureCreatorViewController.swift */; };
+		E4BC8B28223C4DEA009103CB /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BC8B27223C4DEA009103CB /* SettingsTableViewController.swift */; };
+		E4BC8B2A223C50A5009103CB /* EditSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BC8B29223C50A5009103CB /* EditSettingsTableViewController.swift */; };
 		E4C8FA4C220B956700C8A0C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C8FA4B220B956700C8A0C3 /* AppDelegate.swift */; };
 		E4C8FA4E220B956700C8A0C3 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C8FA4D220B956700C8A0C3 /* AgendaViewController.swift */; };
 		E4C8FA51220B956700C8A0C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4C8FA4F220B956700C8A0C3 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 		E484D9ED221FE5A800C9CCAD /* SignatureListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureListViewController.swift; sourceTree = "<group>"; };
 		E484D9F1221FED4400C9CCAD /* NewSignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignatureViewController.swift; sourceTree = "<group>"; };
 		E484D9F3221FF1D200C9CCAD /* SignatureCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureCreatorViewController.swift; sourceTree = "<group>"; };
+		E4BC8B27223C4DEA009103CB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E4BC8B29223C50A5009103CB /* EditSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSettingsTableViewController.swift; sourceTree = "<group>"; };
 		E4C8FA48220B956700C8A0C3 /* ThermaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThermaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C8FA4B220B956700C8A0C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4C8FA4D220B956700C8A0C3 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				E484D9ED221FE5A800C9CCAD /* SignatureListViewController.swift */,
 				E484D9F1221FED4400C9CCAD /* NewSignatureViewController.swift */,
 				E484D9F3221FF1D200C9CCAD /* SignatureCreatorViewController.swift */,
+				E4BC8B27223C4DEA009103CB /* SettingsTableViewController.swift */,
+				E4BC8B29223C50A5009103CB /* EditSettingsTableViewController.swift */,
 				E4C8FA4F220B956700C8A0C3 /* Main.storyboard */,
 				E4C8FA55220B956B00C8A0C3 /* Assets.xcassets */,
 				E4C8FA57220B956B00C8A0C3 /* LaunchScreen.storyboard */,
@@ -251,8 +257,10 @@
 				E484D9EA221D1F1000C9CCAD /* SubmitAgendaTableViewController.swift in Sources */,
 				E484D9E2221A504F00C9CCAD /* MeetingListViewController.swift in Sources */,
 				E484D9E8221CC69000C9CCAD /* WebViewController.swift in Sources */,
+				E4BC8B28223C4DEA009103CB /* SettingsTableViewController.swift in Sources */,
 				E484D9E4221A537600C9CCAD /* Agenda.swift in Sources */,
 				E4C8FA4C220B956700C8A0C3 /* AppDelegate.swift in Sources */,
+				E4BC8B2A223C50A5009103CB /* EditSettingsTableViewController.swift in Sources */,
 				E484D9EE221FE5A800C9CCAD /* SignatureListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
