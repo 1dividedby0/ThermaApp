@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TouchDraw
 
 class SignatureListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -20,6 +21,7 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
     
     var displayedAttendees: [String]!
     var displayedSignatures: [UIImage]!
+    var displayedStrokes: [[Stroke]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +47,13 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
     func filterContent(withSearchText searchText: String) {
         displayedSignatures = []
         displayedAttendees = []
+        displayedStrokes = []
         
         for index in 0..<agenda.attendees.count {
             if agenda.attendees[index].lowercased().contains(searchText.lowercased()) {
                 displayedAttendees.append(agenda.attendees[index])
                 displayedSignatures.append(agenda.signatures[index])
+                displayedStrokes.append(agenda.signaturesStrokes[index])
             }
         }
         
@@ -86,9 +90,11 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
         if editingStyle == .delete {
             var index = indexPath.row
             if isFiltering(){
+                let tempAttendee = displayedAttendees[index]
                 displayedAttendees.remove(at: index)
                 displayedSignatures.remove(at: index)
-                index = agenda.attendees.firstIndex(of: displayedAttendees[indexPath.row])!
+                displayedStrokes.remove(at: index)
+                index = agenda.attendees.firstIndex(of: tempAttendee)!
             }
             agenda.signatures.remove(at: index)
             agenda.signaturesStrokes.remove(at: index)
@@ -113,14 +119,19 @@ class SignatureListViewController: UIViewController, UITableViewDelegate, UITabl
             if let row = sender as? Int {
                 var attendee = agenda.attendees[row]
                 var signature = agenda.signatures[row]
+                var strokes = agenda.signaturesStrokes[row]
+                destination.index = row
+                
                 if isFiltering() {
                     attendee = displayedAttendees[row]
                     signature = displayedSignatures[row]
+                    strokes = displayedStrokes[row]
+                    destination.index = agenda.attendees.firstIndex(of: displayedAttendees[row])
                 }
                 
-                destination.index = row
                 destination.name = attendee
                 destination.signature = signature
+                destination.strokes = strokes
             }
             
             destination.completion = {

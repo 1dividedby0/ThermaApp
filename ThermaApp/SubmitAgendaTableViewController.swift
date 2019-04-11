@@ -27,18 +27,32 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        supervisorLabel.text = agenda.supervisor
+        if agenda.supervisor == "" {
+            supervisorLabel.text = UserDefaults.standard.string(forKey: "supervisor")
+        } else {
+            supervisorLabel.text = agenda.supervisor
+        }
+        
         signaturesLabel.text = "\(agenda.signatures.count)"
-        siteLabel.text = agenda.site
+        
+        if agenda.site == "" {
+            siteLabel.text = UserDefaults.standard.string(forKey: "site")
+        } else {
+            siteLabel.text = agenda.site
+        }
+        
         topicLabel.text = agenda.name
         instructorLabel.text = agenda.instructor
-        dateLabel.text = agenda.date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        dateLabel.text = formatter.string(from: Date())
         var dateComponents = DateComponents()
         let agendaDateComps = agenda.date.components(separatedBy: "-")
         dateComponents.year = Int("20\(agendaDateComps[2])")
         dateComponents.month = Int(agendaDateComps[0])
         dateComponents.day = Int(agendaDateComps[1])
         datePicker.date = Calendar.current.date(from: dateComponents)!
+        dateExpanded = true
     }
     
     @IBAction func didChangeValue(_ sender: Any) {
@@ -120,7 +134,13 @@ class SubmitAgendaTableViewController: UITableViewController, MFMailComposeViewC
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if error == nil {
+            agenda.submitted = true
+            let encoded = NSKeyedArchiver.archivedData(withRootObject: agenda)
+            UserDefaults.standard.set(encoded, forKey: agenda.name)
+        }
         dismiss(animated: true, completion: nil)
+        navigationController!.popToRootViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -18,6 +18,7 @@ class Agenda: NSObject, NSCoding {
     var attendees: [String]!
     var signatures: [UIImage]!
     var signaturesStrokes: [[Stroke]]!
+    var submitted: Bool!
     
     var supervisor: String!
     var site: String!
@@ -30,6 +31,7 @@ class Agenda: NSObject, NSCoding {
         self.attendees = [String]()
         self.signatures = [UIImage]()
         self.signaturesStrokes = [[Stroke]]()
+        self.submitted = false
         self.supervisor = ""
         self.site = ""
         self.instructor = ""
@@ -42,6 +44,7 @@ class Agenda: NSObject, NSCoding {
         aCoder.encode(attendees, forKey: "attendees")
         aCoder.encode(signatures, forKey: "signatures")
         aCoder.encode(signaturesStrokes, forKey: "signaturesStrokes")
+        aCoder.encode(submitted, forKey: "submitted")
         
         aCoder.encode(supervisor, forKey: "supervisor")
         aCoder.encode(site, forKey: "site")
@@ -55,6 +58,7 @@ class Agenda: NSObject, NSCoding {
         attendees = aDecoder.decodeObject(forKey: "attendees") as? [String]
         signatures = aDecoder.decodeObject(forKey: "signatures") as? [UIImage]
         signaturesStrokes = aDecoder.decodeObject(forKey: "signaturesStrokes") as? [[Stroke]]
+        submitted = aDecoder.decodeObject(forKey: "submitted") as? Bool
         
         supervisor = aDecoder.decodeObject(forKey: "supervisor") as? String
         site = aDecoder.decodeObject(forKey: "site") as? String

@@ -275,7 +275,7 @@ class MeetingListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func formatNormalPDF(_ pdf: String, withTitle title: String) -> String{
-        var text = pdf.components(separatedBy: "SAFETY REMINDER")[0].components(separatedBy: "Company Name Therma Job Name Date")[1]
+        var text = pdf.components(separatedBy: "SAFETY REMINDER")[0].components(separatedBy: "Company Name Therma Job Name")[1]
         text = text.replacingOccurrences(of: title, with: "").trimmingCharacters(in: .whitespacesAndNewlines)
         text = text.replacingOccurrences(of: " ", with: "\n  •")
         text = text.replacingOccurrences(of: "", with: "  •")

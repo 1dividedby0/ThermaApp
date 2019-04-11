@@ -17,7 +17,7 @@ class EditSettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        textField.text = label.text!
     }
     @IBAction func done(_ sender: Any) {
         UserDefaults.standard.setValue(textField.text!, forKey: key)
